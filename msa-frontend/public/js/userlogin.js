@@ -10,7 +10,7 @@ loginbtn.addEventListener('click', async () => {
         jsondata[key] = val;
     });
 
-    const res = await fetch('http://127.0.0.1:8000/userlogin',
+    const res = await fetch(`http://${sessionStorage.getItem('usersrvURL')}/userlogin`,
         {
             method: 'POST',
             headers: {

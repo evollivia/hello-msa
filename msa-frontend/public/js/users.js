@@ -11,7 +11,7 @@ window.addEventListener('load', async () => {
 
 // 회원 데이터 가져오기
 const getUserList = async () => {
-    let url = 'http://127.0.0.1:8000/users'
+    let url = `http://${sessionStorage.getItem('usersrvURL')}/users`
     const res = await fetch(url);
     if (res.ok) {
         const data = await res.json();
