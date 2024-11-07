@@ -12,8 +12,9 @@ router.get('/notfound', function(req, res, next) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  // res.sendFile(__dirname + '/views/index.html')
-  res.render('index', {usersrvURL:usersrvURL, productsrvURL:productsrvURL, layout: false});
+  //res.sendFile(__dirname + '/views/index.html')
+  res.render('index', { layout: false,
+      usersrvURL: usersrvURL, productsrvURL: productsrvURL });
 });
 
 /* user registration */
@@ -67,8 +68,7 @@ router.get('/product_put/:pno', function(req, res, next) {
   res.sendFile(__dirname + '/views/product_put.html')
 });
 
-
-//----------------------------------------------------------------------------------
+// ---
 
 /* naver api login */
 router.get('/login/naver', function(req, res, next) {
@@ -79,6 +79,7 @@ router.get('/login/naver', function(req, res, next) {
 router.get('/callback/naver', function(req, res, next) {
   res.sendFile(__dirname + '/views/callbacknaver.html')
 });
+
 
 
 module.exports = router;

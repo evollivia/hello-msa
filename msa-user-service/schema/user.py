@@ -1,4 +1,6 @@
 from pydantic import BaseModel
+from sqlalchemy.cyextension.resultproxy import BaseRow
+
 
 class UserBase(BaseModel):
     userid: str

@@ -24,16 +24,16 @@ const getProductOne = async (pno) => {
     }
 };
 
-// 서버로부터 받아온 상품 정보를 수정 폼에 출력
+// 서버로부터 받아온 상품정보를 수정 폼에 출력
 const displayProductOneForm = (product) => {
     const frm = document.productfrm;
+
     frm.name.value = `${product.name}`;
     frm.desc.value = `${product.desc}`;
     frm.price.value = `${product.price}`;
     frm.maker.value = `${product.maker}`;
     frm.regdate.value = `${product.regdate}`;
     frm.pno.value = `${product.pno}`;
-
 };
 
 // 수정하기 버튼 클릭 처리
@@ -43,7 +43,7 @@ modifybtn.addEventListener('click', () => {
     const productfrm = document.productfrm;
     const formData = new FormData(productfrm);
 
-    if (!confirm('정말로 수정 하시겠습니까?')) return;
+    if (!confirm('정말로 수정하시겠습니까?')) return;
 
     let jsondata = {};
     formData.forEach((val, key) => {
@@ -51,20 +51,25 @@ modifybtn.addEventListener('click', () => {
     });
     console.log(jsondata);
 
-    const res = fetch(`http://127.0.0.1:8050/product`,
-        {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(jsondata)
-        }).then((res) => {
-            if (res.status === 404){
-                location.href='/notfound';
-            }else if (res.status === 200){
-                location.href='/products';
-            }
-        })
-        .catch((error) => {console.log(error)})
+    const res = fetch(`http://${sessionStorage.getItem('productsrvURL')}:8050/product`,
+    {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsondata)
+    }).then((res) => {
+        if (res.status === 404) {
+            location.href='/notfound';
+        } else if (res.status === 200) {
+            location.href='/products';
+        }
+    })
+    .catch((error) => { console.log(error) });
 });
+
+
+
+
+

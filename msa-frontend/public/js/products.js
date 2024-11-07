@@ -10,7 +10,7 @@ window.addEventListener('load', async () => {
 });
 
 const getProductList = async () => {
-    let url = 'http://127.0.0.1:8050/products';
+    let url = `http://${sessionStorage.getItem('productsrvURL')}:8050/products`;
     const res = await fetch(url);
     if (res.ok) {
         const data = await res.json();
@@ -43,18 +43,19 @@ const displayProducList = (products) => {
     productlist.innerHTML = html;
 };
 
-const pmodify= (pno) => {
+const pmodify = (pno) => {
     let url = `http://127.0.0.1:3000/product_put/${pno}`;
     location.href=url;
-}
-const premove= async (pno) => {
-    if (!confirm('정말로 삭제 하시겠습니까?')) return;
-    let url = `http://127.0.0.1:8050/product/${pno}`;
+};
+
+const premove = async (pno) => {
+    if (!confirm('정말로 삭제하시겠습니까?')) return;
+
+    let url = `http://${sessionStorage.getItem('productsrvURL')}:8050/product/${pno}`;
     const res = await fetch(url, { method: 'delete' });
     if (res.ok) {
         console.log(res);
         location.href='/products';
     }
-    alert('삭제되었습니다');
-}
+};
 
